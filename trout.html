@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src=
+        "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+	</script>
+    <style>
+        * {
+        box-sizing: border-box;
+        }
+        td,
+                th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                }
+        #myInput {
+        background-image: url('search.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        }
+
+        #myTable {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+        }
+
+        #myTable th, #myTable td {
+        text-align: left;
+        padding: 12px;
+        }
+
+        #myTable tr {
+        border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header, #myTable tr:hover {
+        background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<h2> Trout Library Functions</h2>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search" title="Type in a name">
+
+<table id="myTable">
+  <tr class="header">
+    <th>Name</th>
+    <th>Version</th>
+    <th>Updated</th>
+    <th>Description</th>
+    <th>Example</th>
+  </tr>
+  <tbody id="funcs">
+    <tr>
+        <td>groupskin</td>
+        <td>1.0</td>
+        <td>2022/08/31</td>
+        <td>Create a new group for the zones on the skin of a group ('group' 'slot') and ('adjgroup' 'adjslot') and names it ('newgroup' 'newslot'). 
+            Good for MIT skin plots.
+            <br><b>groupskin(group,slot,adjgroup,adjslot,newgroup,newslot)</b>
+            <br><u>Inputs:</u>
+            <br><b>group:</b> group in which you want newgroup and newslot to be assigned to
+            <br><b>slot:</b> slot in which you want newgroup and newslot to be assigned to
+            <br><b>adjgroup:</b> group adjacent to group and slot zones
+            <br><b>adjslot:</b> slot adjacent to group and slot zones
+            <br><b>newgroup:</b> group that will be assigned to the zones on the skin of adjgroup and adjslot zones
+            <br><b>newslot:</b> name of slot that will be assigned to the zones on the skin of adjgroup and adjslot zones
+            <br><u>Returns:</u>
+            <br>N/A
+        </td>
+        <td>
+            <a href='groupskin.png' target="_blank"> <img alt='figure' class='img-40 rounded-circle' src='fig.png'/></a>
+        </td>
+    </tr>
+    <tr>
+        <td>lodang</td>
+        <td>1.0</td>
+        <td>2022/08/31</td>
+        <td>Calculate the lode angle given principal stresses (sign convention: (-) compression)
+            <br><b>lodeang(s1,s2,s3)</b>
+            <br><b>s1:</b> maximum principal stress
+            <br><b>s2:</b> intermediate principal stress
+            <br><b>s3:</b> minimum principal stress
+            <br><u>Returns:</u>
+            <br>lode angle (radians)
+        </td>
+        <td><font size="-2">flac3d>[lodeang(-1.0e6,-2.0e6,-20.0e6)]
+            <br>0.476821</font>
+        </td>
+    </tr>
+    <tr>
+        <td>rdc</td>
+        <td>1.0</td>
+        <td>2022/08/31</td>
+        <td>Calculate the factor of safety against the RESPEC dilation criterion (sign convention: (-) compression)
+            <br><b>rdc(s1,s2,s3,D1,D2,n,T0,s0)</b>
+            <br><b>s1:</b> maximum principal stress
+            <br><b>s2:</b> intermediate principal stress
+            <br><b>s3:</b> minimum principal stress
+            <br><b>D1:</b> D1
+            <br><b>D2:</b> D2
+            <br><b>n:</b> n
+            <br><b>T0:</b> T0
+            <br><u>Returns:</u>
+            <br>Factor of safety against RESPEC dilation criterion
+        </td>
+        <td>
+            <a href='code_rdc.txt' target="_blank">code</a>
+        </td>
+    </tr>
+    <tr>
+        <td>mcfs3d</td>
+        <td>1.0</td>
+        <td>2022/08/31</td>
+        <td>Calculate the factor of safety against the 3D mohr-coulomb failure criterion (sign convention: (-) compression)
+            <br><b>mcfs3d(s1,s2,s3,Co,phi)</b>
+            <br><b>s1:</b> maximum principal stress
+            <br><b>s2:</b> intermediate principal stress
+            <br><b>s3:</b> minimum principal stress
+            <br><b>Co:</b> cohesion
+            <br><b>phi:</b> friction angle (radians)
+            <br><u>Returns:</u>
+            <br>Factor of safety against the 3D mohr-coulomb failure criterion
+        </td>
+        <td>
+            <a href='code_mcfs3d.txt' target="_blank">code</a>
+        </td>
+    </tr>
+    <tr>
+        <td>dp</td>
+        <td>1.0</td>
+        <td>2022/08/31</td>
+        <td>Calculate the factor of safety against dilation potential (sign convention: (-) compression)
+            <br><b>mcfs(s1,s2,s3,lim)</b>
+            <br><b>s1:</b> maximum principal stress
+            <br><b>s2:</b> intermediate principal stress
+            <br><b>s3:</b> minimum principal stress
+            <br><b>lim:</b> dilation limit ex:(0.18,0.27,0.54)
+            <br><u>Returns:</u>
+            <br>Factor of safety against dilation potential
+        </td>
+        <td>
+            <a href='code_dp.txt' target="_blank">code</a>
+        </td>
+    </tr>
+</tbody>
+</table>
+
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#funcs tr").filter(function() {
+                $(this).toggle($(this).text()
+                .toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>

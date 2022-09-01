@@ -1,0 +1,13 @@
+fish define CalcExtras()
+    local m, D1, D2, T0, n, s0, PS1, PS2, PS3
+    m=1/144
+    loop foreach local zp zone.list()
+        PS1 = zone.stress.prin.x(zp)*m
+        PS2 = zone.stress.prin.y(zp)*m
+        PS3 = zone.stress.prin.z(zp)*m
+        if zone.group(zp,'Mats')=='Salt'
+            zone.extra(zp,1)=rdc(PS1,PS2,PS3,0.779,1.174,0.839,227,1)
+        endif
+    endloop
+end
+@CalcExtras()

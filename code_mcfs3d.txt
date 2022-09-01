@@ -1,0 +1,17 @@
+fish define CalcExtras()
+    local m
+    m=1/144
+    loop foreach local zp zone.list()
+        PS1 = zone.stress.prin.x(zp)*m
+        PS2 = zone.stress.prin.y(zp)*m
+        PS3 = zone.stress.prin.z(zp)*m
+        if zone.group(zp,'Mats')=='Dolomite'
+            zone.extra(zp,1)=mcfs3d(PS1,PS2,PS3,1000,30*math.pi/180)
+        endif
+    endloop
+end
+@CalcExtras()
+
+Console:
+flac3d>[mcfs3d(-1.0e6,-2.0e6,-20.0e6,1000,30*(math.pi/180))]
+0.552723
